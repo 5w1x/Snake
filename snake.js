@@ -19,6 +19,9 @@ let game = {
         snake.move();
         graphics.drawGame();
         game.timer = window.setTimeout("game.tick()", 500);
+    },
+    isEmpty: function(location) { 
+        return game.board[location.y][location.x] == " ";
     }
 };
 
@@ -41,8 +44,11 @@ let snake = {
      },
     move: function() {
         let location = snake.nextLocation();
-        snake.parts.unshift(location);
-        snake.parts.pop();
+        if (game.isEmpty(location)) {
+            snake.parts.unshift(location);
+            snake.parts.pop();
+        }
+
     }
 }
 
